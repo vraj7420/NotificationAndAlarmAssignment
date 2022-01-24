@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.notificationandalarm.R
-import com.example.notificationandalarm.backgroundtask.ChargingModeReceiver
+import com.example.notificationandalarm.background_task.ChargingModeReceiver
 import kotlinx.android.synthetic.main.fragment_notify_charge_mode.view.*
 
 

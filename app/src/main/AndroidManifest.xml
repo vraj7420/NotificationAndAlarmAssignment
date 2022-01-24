@@ -36,7 +36,7 @@
         </activity>
 
         <receiver
-            android:name=".backgroundtask.ChargingModeReceiver"
+            android:name=".background_task.ChargingModeReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.BatteryLowReceiver"
+            android:name=".background_task.BatteryLowReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -52,7 +52,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.NetworkStateReceiver"
+            android:name=".background_task.NetworkStateReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -62,14 +62,14 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.GpsEnableDisableReceiver"
+            android:name=".background_task.GpsEnableDisableReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PROVIDER_CHANGED" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.DeviceIdleStateReceiver"
+            android:name=".background_task.DeviceIdleStateReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="BootReceiver">
@@ -80,7 +80,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.PredefinedTimeAlarmReceiver"
+            android:name=".background_task.PredefinedTimeAlarmReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -90,7 +90,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".backgroundtask.RepeatingAlarmReceiver"
+            android:name=".background_task.RepeatingAlarmReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

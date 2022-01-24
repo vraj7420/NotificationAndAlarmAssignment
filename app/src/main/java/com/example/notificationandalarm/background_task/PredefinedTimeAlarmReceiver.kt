@@ -1,4 +1,4 @@
-package com.example.notificationandalarm.backgroundtask
+package com.example.notificationandalarm.background_task
 
 import android.annotation.SuppressLint
 import android.app.Notification

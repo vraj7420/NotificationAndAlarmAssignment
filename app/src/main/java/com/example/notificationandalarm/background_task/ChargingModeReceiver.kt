@@ -1,4 +1,4 @@
-package com.example.notificationandalarm.backgroundtask
+package com.example.notificationandalarm.background_task
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -9,32 +9,31 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.location.LocationManager
+import android.os.BatteryManager
 import android.os.Build
 import com.example.notificationandalarm.R
 import com.example.notificationandalarm.view.activity.NotificationDescriptionActivity
 
-class GpsEnableDisableReceiver : BroadcastReceiver() {
-
+class ChargingModeReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder: Notification.Builder
-    private val channelId = "Gps Enable Disable"
+    private val channelId = "Charging Mode"
     private val description = "Set notification"
 
-
-    @SuppressLint("UnspecifiedImmutableFlag")
+    @SuppressLint("UnspecifiedImmutableFlag", "UnsafeProtectedBroadcastReceiver")
     override fun onReceive(ctx: Context?, intent: Intent?) {
 
+        val batteryStatus = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
         val notificationIntent = Intent(ctx, NotificationDescriptionActivity::class.java)
-        notificationIntent.putExtra("Alarm Title", ctx!!.getString(R.string.gps_alarm))
+        notificationIntent.putExtra("Alarm Title", ctx!!.getString(R.string.charge_mode_alarm))
         notificationIntent.putExtra(
             "Alarm Short Description",
-            ctx.getString(R.string.gps_state_change_alarm_short_description)
+            ctx.getString(R.string.charge_mode_alarm_short_description)
         )
         notificationIntent.putExtra(
             "Alarm Long Description",
-            ctx.getString(R.string.gps_state_change_alarm_long_description)
+            ctx.getString(R.string.charge_mode_alarm_long_description)
         )
 
         notificationManager =
@@ -42,69 +41,68 @@ class GpsEnableDisableReceiver : BroadcastReceiver() {
 
         val pendingIntent =
             PendingIntent.getActivity(ctx, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        val manager: LocationManager =
-            ctx.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 notificationChannel =
-                    NotificationChannel(
-                        channelId,
-                        description,
-                        NotificationManager.IMPORTANCE_HIGH
-                    )
+                    NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
                 notificationChannel.enableLights(true)
                 notificationChannel.lightColor = Color.GREEN
                 notificationChannel.enableVibration(false)
                 notificationManager.createNotificationChannel(notificationChannel)
 
                 builder = Notification.Builder(ctx, channelId)
-                    .setSmallIcon(R.drawable.ic_gps_enable)
+                    .setSmallIcon(R.drawable.ic_battery_charging)
                     .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.gps_enable))
-                    .setContentText(ctx.getString(R.string.gps_state_change_alarm_short_description))
-            } else {
+                    .setContentTitle(ctx.getString(R.string.battery_charging))
+                    .setContentText(ctx.getString(R.string.charge_mode_alarm_short_description))
 
-                builder = Notification.Builder(ctx)
-                    .setSmallIcon(R.drawable.ic_gps_enable)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.gps_enable))
-                    .setContentText(ctx.getString(R.string.gps_state_change_alarm_short_description))
-
-
-            }
-            notificationManager.notify(1234, builder.build())
-
-
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationChannel =
-                    NotificationChannel(
-                        channelId,
-                        description,
-                        NotificationManager.IMPORTANCE_HIGH
-                    )
-                notificationChannel.enableLights(true)
-                notificationChannel.lightColor = Color.GREEN
-                notificationChannel.enableVibration(false)
-                notificationManager.createNotificationChannel(notificationChannel)
-
-                builder = Notification.Builder(ctx, channelId)
-                    .setSmallIcon(R.drawable.ic_gps_disable)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.gps_disable))
-                    .setContentText(ctx.getString(R.string.gps_state_change_alarm_short_description))
 
             } else {
 
                 builder = Notification.Builder(ctx)
-                    .setSmallIcon(R.drawable.ic_gps_disable)
+                    .setSmallIcon(R.drawable.ic_battery_charging)
                     .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.gps_disable))
-                    .setContentText(ctx.getString(R.string.gps_state_change_alarm_short_description))
+                    .setContentTitle(ctx.getString(R.string.battery_charging))
+                    .setContentText(ctx.getString(R.string.charge_mode_alarm_short_description))
+
 
             }
             notificationManager.notify(1234, builder.build())
-
         }
+
+        if (batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel =
+                    NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+                notificationChannel.enableLights(true)
+                notificationChannel.lightColor = Color.GREEN
+                notificationChannel.enableVibration(false)
+                notificationManager.createNotificationChannel(notificationChannel)
+
+
+
+                builder = Notification.Builder(ctx, channelId)
+                    .setSmallIcon(R.drawable.ic_battery_not_charging)
+                    .setContentIntent(pendingIntent)
+                    .setContentTitle(ctx.getString(R.string.battery_not_charging))
+                    .setContentText(ctx.getString(R.string.charge_mode_alarm_short_description))
+
+
+            } else {
+                builder = Notification.Builder(ctx)
+                    .setSmallIcon(R.drawable.ic_battery_not_charging)
+                    .setContentIntent(pendingIntent)
+                    .setContentTitle(ctx.getString(R.string.battery_not_charging))
+                    .setContentText(ctx.getString(R.string.charge_mode_alarm_short_description))
+
+
+            }
+        }
+        notificationManager.notify(1234, builder.build())
+
     }
 }
+
+
+
+

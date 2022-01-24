@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.notificationandalarm.R
-import com.example.notificationandalarm.backgroundtask.GpsEnableDisableReceiver
+import com.example.notificationandalarm.background_task.GpsEnableDisableReceiver
 import kotlinx.android.synthetic.main.fragment_notify_gps_state_change.view.*
 
 class NotifyGpsStateChangeFragment : Fragment() {

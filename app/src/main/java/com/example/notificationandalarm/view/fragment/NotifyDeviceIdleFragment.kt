@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.notificationandalarm.R
-import com.example.notificationandalarm.backgroundtask.DeviceIdleStateReceiver
+import com.example.notificationandalarm.background_task.DeviceIdleStateReceiver
 import kotlinx.android.synthetic.main.fragment_notify_device_idle.view.*
 
 class NotifyDeviceIdleFragment : Fragment() {
