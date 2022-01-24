@@ -90,7 +90,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".background_task.RepeatingAlarmReceiver"
+            android:name=".background_task.AfterSomeTimeAlarmSetReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

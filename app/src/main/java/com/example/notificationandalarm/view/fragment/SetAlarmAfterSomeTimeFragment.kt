@@ -39,14 +39,14 @@ class SetAlarmAfterSomeTimeFragment : Fragment() {
             )
 
             if (tetRepeatingAlarmTime.text!!.isEmpty()) {
-                tetRepeatingAlarmTime.error = "For Repeating Alarm First Enter Time"
+                tetRepeatingAlarmTime.error = "For After Some Time  Alarm  set First Enter Time"
 
             } else {
                 val repeatingTime = tetRepeatingAlarmTime.text.toString().toLong()
-                alarmManager.setInexactRepeating(
+                alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis(),
-                    (1000 * repeatingTime),
+                    System.currentTimeMillis() +
+                            (1000 * repeatingTime),
                     pendingIntent
                 )
 

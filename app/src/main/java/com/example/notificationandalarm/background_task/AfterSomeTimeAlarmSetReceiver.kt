@@ -13,7 +13,7 @@ import android.os.Build
 import com.example.notificationandalarm.R
 import com.example.notificationandalarm.view.activity.NotificationDescriptionActivity
 
-class RepeatingAlarmReceiver : BroadcastReceiver() {
+class AfterSomeTimeAlarmSetReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder: Notification.Builder
@@ -58,7 +58,7 @@ class RepeatingAlarmReceiver : BroadcastReceiver() {
             builder = Notification.Builder(ctx, channelId)
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntent)
-                .setContentText(ctx.getString(R.string.repeated_alarm_set))
+                .setContentTitle(ctx.getString(R.string.after_some_alarm_set))
                 .setContentText(ctx.getString(R.string.set_alarm_after_some_time_short_description))
                 .setAutoCancel(true)
         } else {
@@ -66,7 +66,7 @@ class RepeatingAlarmReceiver : BroadcastReceiver() {
             builder = Notification.Builder(ctx)
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntent)
-                .setContentText(ctx.getString(R.string.repeated_alarm_set))
+                .setContentTitle(ctx.getString(R.string.after_some_alarm_set))
                 .setContentText(ctx.getString(R.string.set_alarm_after_some_time_short_description))
                 .setAutoCancel(true)
 
