@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/drawable/ic_notifications.xml" value="0.26614583333333336" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/activity_alarm_screen.xml" value="0.16666666666666666" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/activity_main.xml" value="0.15789473684210525" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/activity_notification_description.xml" value="0.17753623188405798" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/activity_set_alarm_screen.xml" value="0.1933876811594203" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_blank.xml" value="0.14945652173913043" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_notify_battery_low.xml" value="0.2" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_notify_charge_mode.xml" value="0.1234375" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_notify_device_idle.xml" value="0.19384057971014493" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_notify_gps_state_change.xml" value="0.19384057971014493" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_notify_network_change.xml" value="0.14266304347826086" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_set_alarm_after_some_time.xml" value="0.11979166666666667" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_set_alarm_charging_mode.xml" value="0.12708333333333333" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/fragment_set_predefined_time_alarm.xml" value="0.1933876811594203" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/item_of_alaram_list_layout.xml" value="0.15789473684210525" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/item_sample_new.xml" value="0.21337579617834396" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/Assignment8-master/Assignment8-master/app/src/main/res/layout/list_of_alaram_layout.xml" value="0.16666666666666666" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/NotificationAndAlarm/app/src/main/res/layout/activity_alarm_screen.xml" value="0.16770833333333332" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/NotificationAndAlarm/app/src/main/res/layout/activity_main.xml" value="0.15364583333333334" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/NotificationAndAlarm/app/src/main/res/layout/list_of_alaram.xml" value="0.17293233082706766" />
+        <entry key="..\:/vraj educations fille/tatvasoft projects/NotificationAndAlarm/app/src/main/res/layout/list_of_alaram_layout.xml" value="0.16770833333333332" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
