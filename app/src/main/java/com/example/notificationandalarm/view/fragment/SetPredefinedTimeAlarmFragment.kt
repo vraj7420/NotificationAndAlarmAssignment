@@ -37,7 +37,7 @@ class SetPredefinedTimeAlarmFragment : Fragment() {
                     intentAlarm,
                     PendingIntent.FLAG_UPDATE_CURRENT
                 )
-            alarmManager.set(AlarmManager.RTC_WAKEUP, (1000 * 1), pendingIntent)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, (1000 * 30), pendingIntent)
             Toast.makeText(activity, activity?.getString(R.string.set_alarm), Toast.LENGTH_SHORT)
                 .show()
         }
