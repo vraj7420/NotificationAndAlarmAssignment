@@ -23,42 +23,46 @@ class SetPredefinedTimeAlarmFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        return inflater.inflate(R.layout.fragment_set_predefined_time_alarm, container, false)
+    }
+
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val alarmManager: AlarmManager =
             activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val view = inflater.inflate(R.layout.fragment_set_predefined_time_alarm, container, false)
+
         view.btnSetAlarm.setOnClickListener {
             val intentAlarm = Intent()
             intentAlarm.action = "com.alarm.notification"
             intentAlarm.addCategory("android.intent.category.DEFAULT")
-            val pendingIntent =
-                PendingIntent.getBroadcast(
-                    activity,
-                    0,
-                    intentAlarm,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            alarmManager.set(AlarmManager.RTC_WAKEUP, (1000 * 30), pendingIntent)
+            val pendingIntent = PendingIntent.getBroadcast(
+                activity,
+                0,
+                intentAlarm,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            alarmManager.set(AlarmManager.RTC_WAKEUP, (1000 * 1 * 30), pendingIntent)
             Toast.makeText(activity, activity?.getString(R.string.set_alarm), Toast.LENGTH_SHORT)
                 .show()
         }
+
 
         view.btnStopAlarm.setOnClickListener {
             val intentAlarm = Intent()
             intentAlarm.action = "com.alarm.notification"
             intentAlarm.addCategory("android.intent.category.DEFAULT")
-            val pendingIntent =
-                PendingIntent.getBroadcast(
-                    activity,
-                    0,
-                    intentAlarm,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
+            val pendingIntent = PendingIntent.getBroadcast(
+                activity,
+                0,
+                intentAlarm,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
             alarmManager.cancel(pendingIntent)
             Toast.makeText(activity, activity?.getString(R.string.stop_alarm), Toast.LENGTH_SHORT)
                 .show()
-
-
         }
-        return view
     }
 }

@@ -100,6 +100,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".background_task.BatteryLowService" />
+        <service android:name=".background_task.ChargingModeService" />
+        <service android:name=".background_task.DeviceIdleStateService" />
+        <service android:name=".background_task.GpsEnableDisableService" />
     </application>
 
 </manifest>

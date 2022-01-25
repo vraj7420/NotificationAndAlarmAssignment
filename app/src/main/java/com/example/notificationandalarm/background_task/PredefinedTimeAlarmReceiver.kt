@@ -11,25 +11,28 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import com.example.notificationandalarm.R
+import com.example.notificationandalarm.constant.ConstantString
 import com.example.notificationandalarm.view.activity.NotificationDescriptionActivity
 
 class PredefinedTimeAlarmReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder: Notification.Builder
-    private val channelId = "Predefined Time"
-    private val description = "Set notification"
+
 
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onReceive(ctx: Context?, intent: Intent?) {
         val notificationIntent = Intent(ctx, NotificationDescriptionActivity::class.java)
-        notificationIntent.putExtra("Alarm Title", ctx!!.getString(R.string.predefined_time))
         notificationIntent.putExtra(
-            "Alarm Short Description",
+            ConstantString.alarmTitle,
+            ctx!!.getString(R.string.predefined_time)
+        )
+        notificationIntent.putExtra(
+            ConstantString.alarmShortDescription,
             ctx.getString(R.string.predefined_time_alarm_short_description)
         )
         notificationIntent.putExtra(
-            "Alarm Long Description",
+            ConstantString.alarmLongDescription,
             ctx.getString(R.string.predefined_time_alarm_long_description)
         )
 
@@ -42,8 +45,8 @@ class PredefinedTimeAlarmReceiver : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel =
                 NotificationChannel(
-                    channelId,
-                    description,
+                    ConstantString.channelId,
+                    ConstantString.description,
                     NotificationManager.IMPORTANCE_HIGH
                 )
             notificationChannel.enableLights(true)
@@ -51,7 +54,7 @@ class PredefinedTimeAlarmReceiver : BroadcastReceiver() {
             notificationChannel.enableVibration(false)
             notificationManager.createNotificationChannel(notificationChannel)
 
-            builder = Notification.Builder(ctx, channelId)
+            builder = Notification.Builder(ctx, ConstantString.channelId)
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntent)
                 .setContentTitle(ctx.getString(R.string.predefined_time_alarm))

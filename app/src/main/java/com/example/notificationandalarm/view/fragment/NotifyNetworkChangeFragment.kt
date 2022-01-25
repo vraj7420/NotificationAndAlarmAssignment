@@ -23,13 +23,16 @@ class NotifyNetworkChangeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_notify_network_change, container, false)
+        return inflater.inflate(R.layout.fragment_notify_network_change, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         view.btnSetAlarm.setOnClickListener {
             activity?.registerReceiver(
                 networkStateChangeReceiver,
                 IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
             )
-
         }
         view.btnStopAlarm.setOnClickListener {
             if (alarmSetFlag) {
@@ -44,7 +47,6 @@ class NotifyNetworkChangeFragment : Fragment() {
             }
         }
 
-        return view
     }
 
     override fun onDestroy() {

@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notificationandalarm.R
-import com.example.notificationandalarm.model.AlarmList
+import com.example.notificationandalarm.model.AlarmListModel
 import com.example.notificationandalarm.view.activity.SetAlarmScreenActivity
 
 class RecyclerSetAlarmListAdapter(
-    private var setAlarmList: ArrayList<AlarmList>,
+    private var setAlarmListModel: ArrayList<AlarmListModel>,
     private var ctx: Context
 ) :
     RecyclerView.Adapter<RecyclerSetAlarmListAdapter.SetNotificationAlarmViewHolder>() {
@@ -33,7 +33,7 @@ class RecyclerSetAlarmListAdapter(
 
 
     override fun onBindViewHolder(holder: SetNotificationAlarmViewHolder, position: Int) {
-        val alarmList = setAlarmList[position]
+        val alarmList = setAlarmListModel[position]
         holder.alarmTitle.text = alarmList.alarmTitle
         holder.alarmShortDescription.text = alarmList.alarmShortDescription
         holder.alarmLongDescription.text = alarmList.alarmLongDescription
@@ -42,7 +42,7 @@ class RecyclerSetAlarmListAdapter(
 
 
     override fun getItemCount(): Int {
-        return setAlarmList.size
+        return setAlarmListModel.size
     }
 
 
@@ -56,7 +56,7 @@ class RecyclerSetAlarmListAdapter(
         @SuppressLint("UnspecifiedImmutableFlag")
         override fun onClick(v: View?) {
             val position = adapterPosition
-            val alarm = setAlarmList[position]
+            val alarm = setAlarmListModel[position]
             val intent = Intent(ctx, SetAlarmScreenActivity::class.java)
             intent.putExtra("alarm Title", alarm.alarmTitle)
             intent.putExtra("alarm Description", alarm.alarmShortDescription)

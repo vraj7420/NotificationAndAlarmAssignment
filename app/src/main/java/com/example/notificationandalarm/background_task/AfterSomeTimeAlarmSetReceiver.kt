@@ -11,29 +11,29 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import com.example.notificationandalarm.R
+import com.example.notificationandalarm.constant.ConstantString
 import com.example.notificationandalarm.view.activity.NotificationDescriptionActivity
 
 class AfterSomeTimeAlarmSetReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder: Notification.Builder
-    private val channelId = "Repeating Alarm Time"
-    private val description = "Set notification"
 
 
     @SuppressLint("UnspecifiedImmutableFlag", "UnsafeProtectedBroadcastReceiver")
     override fun onReceive(ctx: Context?, intent: Intent?) {
+
         val notificationIntent = Intent(ctx, NotificationDescriptionActivity::class.java)
         notificationIntent.putExtra(
-            "Alarm Title",
+            ConstantString.alarmTitle,
             ctx!!.getString(R.string.after_certain_amount_time)
         )
         notificationIntent.putExtra(
-            "Alarm Short Description",
+            ConstantString.alarmShortDescription,
             ctx.getString(R.string.set_alarm_after_some_time_short_description)
         )
         notificationIntent.putExtra(
-            "Alarm Long Description",
+            ConstantString.alarmLongDescription,
             ctx.getString(R.string.set_alarm_after_some_time_long_description)
         )
 
@@ -46,8 +46,8 @@ class AfterSomeTimeAlarmSetReceiver : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel =
                 NotificationChannel(
-                    channelId,
-                    description,
+                    ConstantString.channelId,
+                    ConstantString.description,
                     NotificationManager.IMPORTANCE_HIGH
                 )
             notificationChannel.enableLights(true)
@@ -55,7 +55,7 @@ class AfterSomeTimeAlarmSetReceiver : BroadcastReceiver() {
             notificationChannel.enableVibration(false)
             notificationManager.createNotificationChannel(notificationChannel)
 
-            builder = Notification.Builder(ctx, channelId)
+            builder = Notification.Builder(ctx, ConstantString.channelId)
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntent)
                 .setContentTitle(ctx.getString(R.string.after_some_alarm_set))
@@ -76,4 +76,5 @@ class AfterSomeTimeAlarmSetReceiver : BroadcastReceiver() {
 
 
     }
+
 }

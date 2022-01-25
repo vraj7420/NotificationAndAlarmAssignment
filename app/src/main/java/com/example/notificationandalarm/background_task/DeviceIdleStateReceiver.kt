@@ -10,8 +10,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import com.example.notificationandalarm.R
+import com.example.notificationandalarm.constant.ConstantString
 import com.example.notificationandalarm.view.activity.NotificationDescriptionActivity
 
 class DeviceIdleStateReceiver : BroadcastReceiver() {
@@ -19,103 +19,88 @@ class DeviceIdleStateReceiver : BroadcastReceiver() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder: Notification.Builder
-    private val channelId = "Device Idle State"
-    private val description = "Set notification"
+    private lateinit var pendingIntent: PendingIntent
 
 
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onReceive(ctx: Context?, intent: Intent?) {
         val notificationIntent = Intent(ctx, NotificationDescriptionActivity::class.java)
-        Log.d("On Receive", "On Receive ")
-        notificationIntent.putExtra("Alarm Title", ctx!!.getString(R.string.device_idle_alarm))
         notificationIntent.putExtra(
-            "Alarm Short Description",
+            ConstantString.alarmTitle,
+            ctx!!.getString(R.string.device_idle_alarm)
+        )
+        notificationIntent.putExtra(
+            ConstantString.alarmShortDescription,
             ctx.getString(R.string.device_idle_alarm_short_description)
         )
         notificationIntent.putExtra(
-            "Alarm Long Description",
+            ConstantString.alarmLongDescription,
             ctx.getString(R.string.device_idle_alarm_long_description)
         )
 
         notificationManager =
             ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        pendingIntent =
+            PendingIntent.getActivity(ctx, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        when {
+            (intent?.action.equals(Intent.ACTION_SCREEN_OFF)) -> {
 
-        val pendingIntent = PendingIntent.getActivity(
-            ctx,
-            0,
-            notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        Log.d("reci", "rec")
-        if (intent?.action.equals(Intent.ACTION_SCREEN_OFF)) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationChannel =
-                    NotificationChannel(
-                        channelId,
-                        description,
-                        NotificationManager.IMPORTANCE_HIGH
-                    )
-                notificationChannel.enableLights(true)
-                notificationChannel.lightColor = Color.GREEN
-                notificationChannel.enableVibration(false)
-                notificationManager.createNotificationChannel(notificationChannel)
-
-                builder = Notification.Builder(ctx, channelId)
-                    .setSmallIcon(R.drawable.ic_device_idle_state)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.device_idle))
-                    .setContentText(ctx.getString(R.string.device_idle_alarm_short_description))
-
-            } else {
-
-                builder = Notification.Builder(ctx)
-                    .setSmallIcon(R.drawable.ic_device_idle_state)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.device_idle))
-                    .setContentText(ctx.getString(R.string.device_idle_alarm_short_description))
-
+                notificationCreate(
+                    ctx,
+                    R.drawable.ic_device_idle_state,
+                    ctx.getString(R.string.device_idle),
+                    ctx.getString(R.string.device_idle_alarm_short_description)
+                )
+            }
+            (intent?.action.equals(Intent.ACTION_SCREEN_ON)) -> {
+                notificationCreate(
+                    ctx,
+                    R.drawable.ic_device_not_idle_state,
+                    ctx.getString(R.string.device_not_idle),
+                    ctx.getString(R.string.device_idle_alarm_short_description)
+                )
 
             }
-            notificationManager.notify(1234, builder.build())
+        }
+
+    }
+
+    private fun notificationCreate(
+        ctx: Context?,
+        smallIcon: Int,
+        title: String,
+        shortDescription: String
+    ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel =
+                NotificationChannel(
+                    ConstantString.channelId,
+                    ConstantString.description,
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.enableVibration(false)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            builder = Notification.Builder(ctx, ConstantString.channelId)
+                .setSmallIcon(smallIcon)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(title)
+                .setContentText(shortDescription)
+
+
+        } else {
+
+            builder = Notification.Builder(ctx)
+                .setSmallIcon(smallIcon)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(title)
+                .setContentText(shortDescription)
 
 
         }
-        if (intent?.action.equals(Intent.ACTION_SCREEN_ON)) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationChannel =
-                    NotificationChannel(
-                        channelId,
-                        description,
-                        NotificationManager.IMPORTANCE_HIGH
-                    )
-                notificationChannel.enableLights(true)
-                notificationChannel.lightColor = Color.GREEN
-                notificationChannel.enableVibration(false)
-                notificationManager.createNotificationChannel(notificationChannel)
-
-                builder = Notification.Builder(ctx, channelId)
-                    .setSmallIcon(R.drawable.ic_device_not_idle_state)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.device_not_idle))
-                    .setContentText(ctx.getString(R.string.device_idle_alarm_short_description))
-
-
-            } else {
-
-                builder = Notification.Builder(ctx)
-                    .setSmallIcon(R.drawable.ic_device_not_idle_state)
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle(ctx.getString(R.string.device_not_idle))
-                    .setContentText(ctx.getString(R.string.device_idle_alarm_short_description))
-
-
-            }
-            notificationManager.notify(1234, builder.build())
-
-
-        }
+        notificationManager.notify(1234, builder.build())
 
 
     }

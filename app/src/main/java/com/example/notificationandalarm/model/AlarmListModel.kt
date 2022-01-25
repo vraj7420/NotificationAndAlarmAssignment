@@ -1,6 +1,6 @@
 package com.example.notificationandalarm.model
 
-class AlarmList(
+class AlarmListModel(
     var alarmTitle: String,
     var alarmShortDescription: String,
     var alarmLongDescription: String

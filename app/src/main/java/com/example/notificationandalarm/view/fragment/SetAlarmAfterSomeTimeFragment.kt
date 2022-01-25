@@ -18,15 +18,21 @@ import kotlinx.android.synthetic.main.fragment_set_alarm_after_some_time.*
 
 class SetAlarmAfterSomeTimeFragment : Fragment() {
 
-    @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_set_alarm_after_some_time, container, false)
+
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val alarmManager: AlarmManager =
             activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val view = inflater.inflate(R.layout.fragment_set_alarm_after_some_time, container, false)
         view.btnSetAlarm.setOnClickListener {
             val intentAlarm = Intent()
             intentAlarm.action = "com.alarm.notification.RepeatingAlarm"
@@ -37,25 +43,21 @@ class SetAlarmAfterSomeTimeFragment : Fragment() {
                 intentAlarm,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-
             if (tetRepeatingAlarmTime.text!!.isEmpty()) {
                 tetRepeatingAlarmTime.error = "For After Some Time  Alarm  set First Enter Time"
-
+                tetRepeatingAlarmTime.requestFocus()
             } else {
                 val repeatingTime = tetRepeatingAlarmTime.text.toString().toLong()
                 alarmManager.set(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() +
-                            (1000 * repeatingTime),
+                    System.currentTimeMillis() + (1000 * 1 * repeatingTime),
                     pendingIntent
                 )
-
                 Toast.makeText(
                     activity,
                     activity?.getString(R.string.set_alarm),
                     Toast.LENGTH_SHORT
                 ).show()
-
             }
 
         }
@@ -64,19 +66,17 @@ class SetAlarmAfterSomeTimeFragment : Fragment() {
             val intentAlarm = Intent()
             intentAlarm.action = "com.alarm.notification.RepeatingAlarm"
             intentAlarm.addCategory("android.intent.category.DEFAULT")
-            val pendingIntent =
-                PendingIntent.getBroadcast(
-                    activity,
-                    0,
-                    intentAlarm,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
+            val pendingIntent = PendingIntent.getBroadcast(
+                activity,
+                0,
+                intentAlarm,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
             alarmManager.cancel(pendingIntent)
             Toast.makeText(activity, activity?.getString(R.string.stop_alarm), Toast.LENGTH_SHORT)
                 .show()
         }
-        return view
-    }
 
+    }
 
 }

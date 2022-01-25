@@ -12,7 +12,7 @@ class SetAlarmScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_alarm_screen)
-        alarmTitle = intent.getStringExtra("alarm Title") ?: ""
+        alarmTitle = intent.getStringExtra("alarm Title").toString()
         tvAlarmTitle.text = alarmTitle
         setFragment()
     }
